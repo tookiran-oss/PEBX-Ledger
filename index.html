@@ -3,325 +3,460 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PEBX - Premium Financial Ledger</title>
+    <title>PEBX - Premium Construction Ledger</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Core Layout Architecture */
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #070708; /* Luxury Obsidian Black */
-            color: #F4F4F6; /* Crisp Off-White Text */
-            background-image: radial-gradient(circle at top center, #16161A, #040405);
-            letter-spacing: 0.03em;
+            background-color: #F3F4F6; /* Premium Architectural Off-White */
+            color: #1F2937; /* Dark Carbon Matte */
+            letter-spacing: 0.02em;
+            overflow-x: hidden;
         }
         .luxury-heading {
             font-family: 'Cinzel', serif;
-            letter-spacing: 0.18em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.16em;
         }
         .luxury-subheading {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
+            font-weight: 600;
             letter-spacing: 0.25em;
             text-transform: uppercase;
         }
-        
-        /* Premium Gold & Monochrome Accents */
-        .text-premium-gold { color: #E5C158; }
-        .text-premium-gold-light { color: #FDE68A; }
-        .border-premium-gold { border-color: #D4AF37; }
-        
-        /* Panel Styling */
+
+        /* FUTURISTIC INDUSTRIAL CONSTRUCTION SPLASH SCREEN BACKGROUND */
+        #landingPage {
+            background-color: #070C0A; 
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(74, 107, 93, 0.2), #070C0A),
+                /* Technical structural design blueprints grid */
+                linear-gradient(rgba(142, 168, 157, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(142, 168, 157, 0.04) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            color: #FFFFFF;
+        }
+
+        /* Diagonal Structural Steel Cross-Bracing / Framing Vectors */
+        .construction-truss-overlay {
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(135deg, rgba(74, 107, 93, 0.02) 25%, transparent 25%) -50px 0,
+                linear-gradient(225deg, rgba(142, 168, 157, 0.02) 25%, transparent 25%) -50px 0,
+                linear-gradient(45deg, rgba(74, 107, 93, 0.02) 25%, transparent 25%),
+                linear-gradient(315deg, rgba(142, 168, 157, 0.02) 25%, transparent 25%);
+            background-size: 100px 100px;
+            pointer-events: none;
+        }
+
+        /* Central Fluid Meridian-Style Capsule Overlay */
+        .fluid-capsule {
+            background: linear-gradient(180deg, #2563EB 0%, #4A6B5D 45%, #8EA89D 80%, #F59E0B 100%);
+            filter: hue-rotate(10deg) saturate(1.15);
+            opacity: 0.7;
+            box-shadow: 0 0 100px rgba(74, 107, 93, 0.35);
+            mix-blend-mode: screen;
+        }
+
+        /* Technical Alignment Ring Overlays */
+        .structural-track {
+            border: 1px dashed rgba(142, 168, 157, 0.08);
+            transform: rotate(-8deg);
+        }
+
+        /* DASHBOARD DESIGN APPARATUS: OFF-WHITE, AD GREY & MIST GREEN */
         .bg-premium-panel { 
-            background-color: #0E0E10; 
-            border: 1px solid #2A251E; /* Masterfully subtle gold-tinted dark border */
-            box-shadow: 0 12px 40px rgba(0,0,0,0.85); 
+            background-color: #FFFFFF; 
+            border: 1px solid #D1D5DB; /* AD Grey Structural Border */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015); 
         }
         .bg-premium-panel-light { 
-            background-color: #141418; 
-            border: 1px solid #2A251E; 
-        }
-        
-        /* Metallic Polished Gold & Dark Contrast Buttons */
-        .btn-gold {
-            background: linear-gradient(135deg, #C5A059, #F6E4B6, #D4AF37);
-            color: #070708;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #D4AF37, #F6E4B6, #C5A059);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(229, 193, 88, 0.35);
-        }
-        .btn-outline-white {
-            border: 1px solid #E4E4E7;
-            color: #E4E4E7;
-            background: transparent;
-            letter-spacing: 0.15em;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-outline-white:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #E5C158;
-            color: #E5C158;
-            box-shadow: 0 4px 15px rgba(229, 193, 88, 0.15);
+            background-color: #F8FAFC; 
+            border: 1px solid #E5E7EB; 
         }
 
-        /* Input Customizations */
+        /* Mist Green Dynamic Actions Palette */
+        .btn-mist-green {
+            background-color: #4A6B5D; /* Bold Mist Green */
+            color: #FFFFFF;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-mist-green:hover {
+            background-color: #385247;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(74, 107, 93, 0.25);
+        }
+
+        .btn-outline-mist {
+            border: 1px solid #8EA89D; /* Soft Mist Tone Accent */
+            color: #4A6B5D;
+            background-color: transparent;
+            letter-spacing: 0.12em;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-outline-mist:hover {
+            background-color: #ECF2F0;
+            border-color: #4A6B5D;
+            color: #385247;
+        }
+
+        /* Form Fields & Typography */
         input, select {
-            background-color: #141418 !important;
-            color: #F4F4F6 !important;
-            border: 1px solid #333338 !important;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #FFFFFF !important;
+            color: #1F2937 !important;
+            border: 1px solid #D1D5DB !important;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         input:focus, select:focus {
-            border-color: #E5C158 !important;
+            border-color: #4A6B5D !important;
             outline: none;
-            box-shadow: 0 0 10px rgba(229, 193, 88, 0.25);
-        }
-        ::placeholder {
-            color: #52525B !important;
-            font-weight: 200;
+            box-shadow: 0 0 0 3px rgba(74, 107, 93, 0.15);
         }
         
-        /* Table Aesthetics */
-        th { border-bottom: 1px solid #2A251E; letter-spacing: 0.15em; }
-        td { border-bottom: 1px solid #1A1A1E; font-weight: 300; }
-        tr:hover td { background-color: rgba(229, 193, 88, 0.03); }
+        th { border-bottom: 2px solid #E5E7EB; letter-spacing: 0.1em; color: #4B5563; }
+        td { border-bottom: 1px solid #E5E7EB; }
+        tr:hover td { background-color: #F9FAFB; }
 
-        /* Print Override Suite */
+        /* Document Blueprint Printing Rules */
         @media print {
-            body { background: #FFFFFF; color: #000000; padding: 0; background-image: none; }
+            #landingPage { display: none !important; }
+            #dashboardPage { display: block !important; }
+            body { background: #FFFFFF; color: #000000; }
             .no-print { display: none !important; }
-            .bg-premium-panel, .bg-premium-panel-light { background: #FFFFFF !important; border: 1px solid #DDD !important; box-shadow: none !important; color: #000 !important; }
-            .text-premium-gold, .text-premium-gold-light { color: #000 !important; }
-            .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-            table { page-break-inside: auto; }
-            tr { page-break-inside: avoid; page-break-after: auto; }
-            td, th { border-bottom: 1px solid #DDD !important; color: #000 !important; }
-            input, select { background: transparent !important; color: #000 !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+            .bg-premium-panel { background: #FFFFFF !important; border: 1px solid #9CA3AF !important; box-shadow: none !important; }
+            input, select { border: none !important; background: transparent !important; padding: 0 !important; }
         }
     </style>
 </head>
 <body class="min-h-screen antialiased">
 
-    <nav class="bg-[#040405] border-b border-[#2A251E] py-6 px-8 shadow-2xl no-print sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex flex-col items-center sm:items-start">
-                <span class="text-3xl font-bold text-premium-gold luxury-heading uppercase">PEBX</span>
-                <span class="text-[9px] sm:text-[10px] luxury-subheading text-[#A1A1AA] mt-1">Steel Building Systems</span>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button onclick="exportToExcel()" class="btn-outline-white px-5 py-2.5 rounded font-medium text-xs flex items-center gap-2 uppercase">
-                    <i class="fa-solid fa-file-excel"></i> Export CSV
-                </button>
-                <button onclick="exportToPDF()" class="btn-gold px-6 py-2.5 rounded font-semibold text-xs flex items-center gap-2 uppercase">
-                    <i class="fa-solid fa-print"></i> Generate PDF
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <!-- SCREEN 1: FUTURISTIC SCHEMATIC CONSTRUCTION SPLASH LAYER -->
+    <div id="landingPage" class="fixed inset-0 z-[100] flex flex-col justify-between p-8 transition-all duration-700 ease-in-out select-none">
         
-        <header class="bg-premium-panel rounded-xl p-6 sm:p-8 mb-8 print-card">
-            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6 border-b border-[#2A251E] pb-6">
-                <div>
-                    <div class="text-[10px] uppercase tracking-[0.25em] text-[#A1A1AA] font-semibold mb-2">Corporate Statement</div>
-                    <h1 class="text-2xl sm:text-3xl font-light text-white tracking-wide luxury-heading uppercase">Expense Claim & Reconciliation</h1>
-                    <div id="printReportPeriod" class="text-xs font-bold uppercase tracking-wider text-black hidden print:block mt-3">Report Period: All Ledger Records</div>
-                </div>
-                <div class="flex flex-col items-start md:items-end gap-1 hidden print:flex">
-                    <div class="text-2xl font-bold tracking-widest text-black luxury-heading">PEBX</div>
-                    <div class="text-[9px] uppercase tracking-widest text-gray-500 font-bold">Premium Engineering Architecture</div>
-                </div>
-            </div>
+        <div class="construction-truss-overlay"></div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-                <div class="space-y-1">
-                    <label class="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#A1A1AA] no-print">Claimant Name</label>
-                    <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Claimant Name:</div>
-                    <input type="text" id="metaName" placeholder="e.g., Motupalli Saikiran" oninput="saveState()" class="w-full rounded-lg px-3 py-2.5 text-sm font-medium focus:outline-none print:bg-transparent print:border-none print:p-0">
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#A1A1AA] no-print">Designation</label>
-                    <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Designation:</div>
-                    <input type="text" id="metaDesignation" placeholder="e.g., Managing Director" oninput="saveState()" class="w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none print:bg-transparent print:border-none print:p-0">
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#A1A1AA] no-print">Compilation Date</label>
-                    <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Compilation Date:</div>
-                    <input type="date" id="metaDate" oninput="saveState()" class="w-full rounded-lg px-3 py-2.5 text-sm focus:outline-none print:bg-transparent print:border-none print:p-0">
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#A1A1AA] no-print">Audit Review Status</label>
-                    <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Audit Review:</div>
-                    <select id="metaStatus" onchange="saveState()" class="w-full rounded-lg px-3 py-2.5 text-sm font-medium focus:outline-none appearance-none print:bg-transparent print:border-none print:p-0">
-                        <option value="Pending Settlement">Pending Settlement</option>
-                        <option value="Approved & Verified">Approved & Verified</option>
-                        <option value="Audited & Cleared">Audited & Cleared</option>
-                    </select>
-                </div>
+        <!-- Structural Schematic Framework Corner Accents -->
+        <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-zinc-700 pointer-events-none"></div>
+        <div class="absolute top-6 right-6 w-8 h-8 border-t border-r border-zinc-700 pointer-events-none"></div>
+        <div class="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-zinc-700 pointer-events-none"></div>
+        <div class="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-zinc-700 pointer-events-none"></div>
+
+        <!-- TOP CENTRE BRANDING: Stylish Bold Architectural Text Stack -->
+        <header class="w-full text-center pt-8 z-20">
+            <h2 class="text-4xl sm:text-5xl font-black tracking-[0.25em] text-white luxury-heading uppercase drop-shadow-[0_4px_15px_rgba(74,107,93,0.4)]">
+                PEBX
+            </h2>
+            <div class="flex items-center justify-center gap-3 mt-2">
+                <span class="h-[1px] w-8 bg-zinc-700"></span>
+                <p class="text-[10px] sm:text-xs font-bold tracking-[0.4em] uppercase text-[#8EA89D]">
+                    Steel Building Systems
+                </p>
+                <span class="h-[1px] w-8 bg-zinc-700"></span>
             </div>
         </header>
 
-        <div class="bg-premium-panel rounded-xl p-5 mb-8 no-print flex flex-col sm:flex-row items-center justify-between gap-4 border-l-4 border-[#E5C158]">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-[#141418] border border-[#2A251E] flex items-center justify-center text-premium-gold">
-                    <i class="fa-solid fa-calendar-circle-lines text-xs"></i>
-                </div>
-                <div>
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Generate Filtered Scope</h4>
-                    <p class="text-[10px] text-[#A1A1AA]">Metrics summaries and exports will compute strictly between these dates.</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto justify-end">
-                <div class="flex items-center gap-2">
-                    <span class="text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">From:</span>
-                    <input type="date" id="filterStartDate" onchange="render()" class="rounded-lg px-3 py-1.5 text-xs focus:outline-none">
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">To:</span>
-                    <input type="date" id="filterEndDate" onchange="render()" class="rounded-lg px-3 py-1.5 text-xs focus:outline-none">
-                </div>
-                <button onclick="clearDateFilter()" class="btn-outline-white px-3 py-1.5 rounded text-[10px] font-medium uppercase tracking-wider transition-all">
-                    Reset Filter
-                </button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-premium-panel rounded-xl border-t-2 border-[#E5C158] p-6 print-card">
-                <div class="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A1A1AA] mb-2">Advances Allocated</div>
-                <div id="displayTotalAdvances" class="text-3xl font-light tracking-wide text-white luxury-heading">₹0.00</div>
-            </div>
-            <div class="bg-premium-panel rounded-xl border-t-2 border-[#FFFFFF] p-6 print-card">
-                <div class="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A1A1AA] mb-2">Expenses Claimed</div>
-                <div id="displayTotalExpenses" class="text-3xl font-light tracking-wide text-[#F4F4F6] luxury-heading">₹0.00</div>
-            </div>
-            <div id="balanceCardContainer" class="bg-premium-panel rounded-xl border-t-2 border-[#E5C158] p-6 print-card transition-colors duration-300">
-                <div class="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A1A1AA] mb-2">Unspent Balance</div>
-                <div id="displayUnspentBalance" class="text-3xl font-light tracking-wide text-premium-gold luxury-heading">₹0.00</div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 no-print">
+        <!-- Main Hero Composition Area -->
+        <main class="relative w-full max-w-5xl mx-auto flex items-center justify-center flex-1">
             
-            <div class="bg-premium-panel rounded-xl p-6">
-                <h3 class="text-xs font-medium uppercase tracking-[0.15em] text-premium-gold mb-5 flex items-center gap-3 border-b border-[#2A251E] pb-3">
-                    <i class="fa-solid fa-vault"></i> Log Advance Allocation
-                </h3>
-                <form id="advanceForm" onsubmit="addAdvanceRecord(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Received Date</label>
-                            <input type="date" id="advDate" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Amount (₹)</label>
-                            <input type="number" id="advAmount" step="0.01" min="0.01" placeholder="0.00" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-medium">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Advance Description</label>
-                        <input type="text" id="advDesc" placeholder="e.g., Initial allocation for structural site review" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
-                    </div>
-                    <button type="submit" class="w-full btn-outline-white py-3 rounded-lg text-xs uppercase font-medium cursor-pointer mt-2">
-                        Add Advance Entry
-                    </button>
-                </form>
-            </div>
+            <!-- Blueprint Grid Layout Measurement Overlays -->
+            <div class="absolute w-[700px] h-[350px] rounded-full structural-track top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            <div class="absolute w-[900px] h-[450px] rounded-full structural-track top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50 pointer-events-none"></div>
 
-            <div class="bg-premium-panel rounded-xl p-6">
-                <h3 class="text-xs font-medium uppercase tracking-[0.15em] text-white mb-5 flex items-center gap-3 border-b border-[#2A251E] pb-3">
-                    <i class="fa-solid fa-receipt"></i> Log Business Expense
-                </h3>
-                <form id="expenseForm" onsubmit="addExpenseRecord(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Date</label>
-                            <input type="date" id="expDate" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Amount (₹)</label>
-                            <input type="number" id="expAmount" step="0.01" min="0.01" placeholder="0.00" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-medium">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-medium text-[#A1A1AA] uppercase tracking-wider mb-1">Expense Description</label>
-                        <input type="text" id="expDesc" placeholder="e.g., Accommodation and site travel log" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
-                    </div>
-                    <button type="submit" class="w-full btn-gold py-3 rounded-lg text-xs uppercase cursor-pointer mt-2">
-                        Commit Expense
-                    </button>
-                </form>
+            <!-- Central Structural Focus Group -->
+            <div class="relative flex flex-col items-center justify-center w-full">
+                <!-- Glowing Capsule Component Shape -->
+                <div class="absolute w-56 sm:w-64 h-[410px] sm:h-[490px] rounded-full fluid-capsule z-0"></div>
+                
+                <!-- High-Contrast Heading Layout Overlap -->
+                <div class="relative z-10 text-center px-4 mix-blend-difference">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.05] luxury-heading">
+                        EMPLOYEE<br>EXPENSE<br>LEDGER
+                    </h1>
+                </div>
             </div>
-        </div>
+        </main>
 
-        <div class="bg-premium-panel rounded-xl overflow-hidden mb-8 print-card">
-            <div class="px-6 py-4 bg-premium-panel-light border-b border-[#2A251E] flex items-center justify-between">
-                <h2 class="text-xs font-medium uppercase tracking-[0.15em] text-premium-gold flex items-center gap-2">
-                    <i class="fa-solid fa-money-bill-transfer"></i> 1. Corporate Cash Advances Received
-                </h2>
-                <span id="advanceCount" class="text-[9px] font-bold tracking-widest bg-[#2A251E] text-premium-gold-light px-2.5 py-1 rounded-sm uppercase">0 Records</span>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="bg-[#0E0E10] text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">
-                            <th class="px-6 py-4 w-44">Transaction Date</th>
-                            <th class="px-6 py-4">Advance Description</th>
-                            <th class="px-6 py-4 w-52 text-right">Amount Received</th>
-                            <th class="px-6 py-4 w-32 text-center no-print">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="advanceTableBody" class="text-xs text-[#F4F4F6]">
-                    </tbody>
-                </table>
-            </div>
-            <div id="advanceEmptyState" class="p-8 text-center text-[#71717A] text-xs italic border-t border-[#1A1A1E]">
-                No advance deposits registered within this date window.
-            </div>
-        </div>
-
-        <div class="bg-premium-panel rounded-xl overflow-hidden print-card">
-            <div class="px-6 py-4 bg-premium-panel-light border-b border-[#2A251E] flex items-center justify-between">
-                <h2 class="text-xs font-medium uppercase tracking-[0.15em] text-white flex items-center gap-2">
-                    <i class="fa-solid fa-list-ol"></i> 2. Itemized Business Expense Ledger
-                </h2>
-                <span id="expenseCount" class="text-[9px] font-bold tracking-widest bg-[#2A251E] text-[#F4F4F6] px-2.5 py-1 rounded-sm uppercase">0 Records</span>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="bg-[#0E0E10] text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">
-                            <th class="px-6 py-4 w-44">Date</th>
-                            <th class="px-6 py-4">Expense Description</th>
-                            <th class="px-6 py-4 w-52 text-right">Amount</th>
-                            <th class="px-6 py-4 w-32 text-center no-print">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="expenseTableBody" class="text-xs text-[#F4F4F6]">
-                    </tbody>
-                </table>
-            </div>
-            <div id="expenseEmptyState" class="p-8 text-center text-[#71717A] text-xs italic border-t border-[#1A1A1E]">
-                No operational disbursement records compiled within this date window.
-            </div>
-        </div>
-
+        <!-- Bottom Layout Row Containing Only the Interactive Trigger Anchor Button -->
+        <footer class="w-full flex justify-center items-center pb-8 z-20">
+            <button onclick="enterDashboard()" class="bg-white text-black font-bold text-xs tracking-[0.22em] uppercase px-12 py-4 rounded-full flex items-center gap-4 shadow-2xl hover:bg-zinc-200 transform hover:-translate-y-0.5 transition-all duration-300 cursor-pointer border border-zinc-300">
+                Open Ledger <i class="fa-solid fa-chevron-right text-[10px] text-zinc-500"></i>
+            </button>
+        </footer>
     </div>
 
+
+    <!-- SCREEN 2: MAIN LEDGER MANAGEMENT APPLICATION MODULE -->
+    <div id="dashboardPage" class="hidden min-h-screen opacity-0 transition-opacity duration-700 ease-out">
+        
+        <!-- Corporate Utility Header -->
+        <nav class="bg-white border-b border-gray-300 py-5 px-8 shadow-sm no-print sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex flex-col items-start">
+                    <span class="text-2xl font-black text-gray-900 luxury-heading uppercase">PEBX</span>
+                    <span class="text-[9px] luxury-subheading text-gray-500 mt-0.5">Steel Building Systems</span>
+                </div>
+                <button onclick="exitToLanding()" class="no-print text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-gray-900 flex items-center gap-2 transition-colors">
+                    <i class="fa-solid fa-arrow-left-long"></i> Splash Screen
+                </button>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+            
+            <!-- Information Identity Header Block -->
+            <header class="bg-premium-panel rounded-xl p-6 sm:p-8 mb-8">
+                <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6 border-b border-gray-200 pb-6">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold mb-1">Corporate Statement</div>
+                        <h1 class="text-2xl font-light text-gray-900 tracking-wide luxury-heading uppercase">Expense Claim & Reconciliation</h1>
+                        <div id="printReportPeriod" class="text-xs font-bold uppercase tracking-wider text-black hidden print:block mt-3">Report Period: All Ledger Records</div>
+                    </div>
+                    <div class="flex flex-col items-start md:items-end gap-0.5 hidden print:flex">
+                        <div class="text-xl font-black tracking-widest text-black luxury-heading">PEBX</div>
+                        <div class="text-[8px] uppercase tracking-widest text-gray-400 font-bold">Steel Building Systems</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 no-print">Claimant Name</label>
+                        <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Claimant Name:</div>
+                        <input type="text" id="metaName" placeholder="e.g., Motupalli Saikiran" oninput="saveState()" class="w-full rounded-lg px-3 py-2 text-sm font-medium focus:outline-none print:bg-transparent print:border-none print:p-0">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 no-print">Designation</label>
+                        <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Designation:</div>
+                        <input type="text" id="metaDesignation" placeholder="e.g., Managing Director" oninput="saveState()" class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none print:bg-transparent print:border-none print:p-0">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 no-print">Compilation Date</label>
+                        <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Compilation Date:</div>
+                        <input type="date" id="metaDate" oninput="saveState()" class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none print:bg-transparent print:border-none print:p-0">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-gray-500 no-print">Audit Review Status</label>
+                        <div class="text-xs font-bold uppercase tracking-wider text-black hidden print:block">Audit Review:</div>
+                        <select id="metaStatus" onchange="saveState()" class="w-full rounded-lg px-3 py-2 text-sm font-medium focus:outline-none appearance-none print:bg-transparent print:border-none print:p-0">
+                            <option value="Pending Settlement">Pending Settlement</option>
+                            <option value="Approved & Verified">Approved & Verified</option>
+                            <option value="Audited & Cleared">Audited & Cleared</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Financial Aggregation Indicator Matrices -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-premium-panel rounded-xl border-t-4 border-gray-400 p-6">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Advances Allocated</div>
+                    <div id="displayTotalAdvances" class="text-2xl font-normal tracking-wide text-gray-900 luxury-heading">₹0.00</div>
+                </div>
+                <div class="bg-premium-panel rounded-xl border-t-4 border-[#8EA89D] p-6">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Expenses Claimed</div>
+                    <div id="displayTotalExpenses" class="text-2xl font-normal tracking-wide text-gray-900 luxury-heading">₹0.00</div>
+                </div>
+                <div id="balanceCardContainer" class="bg-premium-panel rounded-xl border-t-4 border-[#4A6B5D] p-6 transition-colors duration-300">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">Unspent Balance</div>
+                    <div id="displayUnspentBalance" class="text-2xl font-normal tracking-wide text-gray-900 luxury-heading">₹0.00</div>
+                </div>
+            </div>
+
+            <!-- Ledger Record Interactive Submissions -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 no-print">
+                
+                <!-- Cash Advance Log Component -->
+                <div class="bg-premium-panel rounded-xl p-6">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 flex items-center gap-2 border-b border-gray-200 pb-3">
+                        <i class="fa-solid fa-vault text-[#8EA89D]"></i> Log Advance Allocation
+                    </h3>
+                    <form id="advanceForm" onsubmit="addAdvanceRecord(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Received Date</label>
+                                <input type="date" id="advDate" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Amount (₹)</label>
+                                <input type="number" id="advAmount" step="0.01" min="0.01" placeholder="0.00" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-semibold">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Advance Description</label>
+                            <input type="text" id="advDesc" placeholder="e.g., Initial allocation for structural site review" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
+                        </div>
+                        <button type="submit" class="w-full btn-outline-mist py-2.5 rounded-lg text-xs uppercase font-semibold cursor-pointer">
+                            Add Advance Entry
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Business Expense Log Component -->
+                <div class="bg-premium-panel rounded-xl p-6">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4 flex items-center gap-2 border-b border-gray-200 pb-3">
+                        <i class="fa-solid fa-receipt text-[#4A6B5D]"></i> Log Business Expense
+                    </h3>
+                    <form id="expenseForm" onsubmit="addExpenseRecord(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Date</label>
+                                <input type="date" id="expDate" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Amount (₹)</label>
+                                <input type="number" id="expAmount" step="0.01" min="0.01" placeholder="0.00" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none font-semibold">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-medium text-gray-500 uppercase tracking-wider mb-1">Expense Description</label>
+                            <input type="text" id="expDesc" placeholder="e.g., Accommodation and site travel log" required class="w-full rounded-lg px-3 py-2 text-sm focus:outline-none">
+                        </div>
+                        <button type="submit" class="w-full btn-mist-green py-2.5 rounded-lg text-xs uppercase cursor-pointer">
+                            Commit Expense Record
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Table Block 1: Corporate Advance Ledger -->
+            <div class="bg-premium-panel rounded-xl overflow-hidden mb-8">
+                <div class="px-6 py-4 bg-premium-panel-light border-b border-gray-200 flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-money-bill-transfer text-[#8EA89D]"></i> 1. Corporate Cash Advances Received
+                    </h2>
+                    <span id="advanceCount" class="text-[9px] font-bold tracking-widest bg-gray-200 text-gray-700 px-2.5 py-1 rounded-sm uppercase">0 Records</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                                <th class="px-6 py-3 w-44">Transaction Date</th>
+                                <th class="px-6 py-3">Advance Description</th>
+                                <th class="px-6 py-3 w-52 text-right">Amount Received</th>
+                                <th class="px-6 py-3 w-32 text-center no-print">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="advanceTableBody" class="text-sm text-gray-900">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="advanceEmptyState" class="p-6 text-center text-gray-400 text-xs italic border-t border-gray-100">
+                    No advance entries recorded within this filtered block view.
+                </div>
+            </div>
+
+            <!-- Table Block 2: Disbursed Expenses Itemized List -->
+            <div class="bg-premium-panel rounded-xl overflow-hidden mb-8">
+                <div class="px-6 py-4 bg-premium-panel-light border-b border-gray-200 flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ol text-[#4A6B5D]"></i> 2. Itemized Business Expense Ledger
+                    </h2>
+                    <span id="expenseCount" class="text-[9px] font-bold tracking-widest bg-gray-200 text-gray-700 px-2.5 py-1 rounded-sm uppercase">0 Records</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-500">
+                                <th class="px-6 py-3 w-44">Date</th>
+                                <th class="px-6 py-3">Expense Description</th>
+                                <th class="px-6 py-3 w-52 text-right">Amount</th>
+                                <th class="px-6 py-3 w-32 text-center no-print">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody" class="text-sm text-gray-900">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="expenseEmptyState" class="p-6 text-center text-gray-400 text-xs italic border-t border-gray-100">
+                    No operational expense metrics stored within this tracking block.
+                </div>
+            </div>
+
+            <!-- Timeline Configuration Footer Component -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 no-print">
+                
+                <!-- Date Filter Modality -->
+                <div class="lg:col-span-2 bg-premium-panel rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 border-l-4 border-[#4A6B5D]">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-800">
+                            <i class="fa-solid fa-calendar text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-900">Configure Date Filters</h4>
+                            <p class="text-[10px] text-gray-400">Isolate architectural entries between custom dates.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-end">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-semibold uppercase text-gray-400">From:</span>
+                            <input type="date" id="filterStartDate" onchange="render()" class="rounded-lg px-2.5 py-1 text-xs focus:outline-none">
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-semibold uppercase text-gray-400">To:</span>
+                            <input type="date" id="filterEndDate" onchange="render()" class="rounded-lg px-2.5 py-1 text-xs focus:outline-none">
+                        </div>
+                        <button onclick="clearDateFilter()" class="btn-outline-mist px-2.5 py-1 rounded text-[10px] font-semibold uppercase tracking-wider transition-all">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Structured Export Actions Layout -->
+                <div class="bg-premium-panel rounded-xl p-5 flex items-center justify-center gap-4">
+                    <button onclick="exportToExcel()" class="w-full btn-outline-mist py-3 rounded-lg font-semibold text-xs flex items-center justify-center gap-2 uppercase cursor-pointer">
+                        <i class="fa-solid fa-file-csv"></i> Export CSV
+                    </button>
+                    <button onclick="exportToPDF()" class="w-full btn-mist-green py-3 rounded-lg font-semibold text-xs flex items-center justify-center gap-2 uppercase cursor-pointer">
+                        <i class="fa-solid fa-print"></i> Print PDF
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TRANSACTION PROCESSING CORE ENGINE -->
     <script>
-        // System Data Registry 
+        // Fluid Transition Architecture
+        function enterDashboard() {
+            const lp = document.getElementById('landingPage');
+            const dp = document.getElementById('dashboardPage');
+            
+            lp.classList.add('translate-y-[-100%]', 'opacity-0');
+            setTimeout(() => {
+                lp.classList.add('hidden');
+                dp.classList.remove('hidden');
+                setTimeout(() => {
+                    dp.classList.remove('opacity-0');
+                    dp.classList.add('opacity-100');
+                }, 50);
+            }, 600);
+        }
+
+        function exitToLanding() {
+            const lp = document.getElementById('landingPage');
+            const dp = document.getElementById('dashboardPage');
+            
+            dp.classList.remove('opacity-100');
+            dp.classList.add('opacity-0');
+            setTimeout(() => {
+                dp.className = "hidden min-h-screen opacity-0 transition-opacity duration-700 ease-out";
+                lp.classList.remove('hidden');
+                setTimeout(() => {
+                    lp.classList.remove('translate-y-[-100%]', 'opacity-0');
+                }, 50);
+            }, 600);
+        }
+
+        // Ledger Core Application Registry State
         let state = {
             name: "",
             designation: "",
@@ -340,14 +475,8 @@
             const cache = localStorage.getItem("pebx_premium_ledger");
             if (cache) {
                 state = JSON.parse(cache);
-                
-                state.advances.forEach(a => {
-                    a.isEditing = false;
-                    if (a.reference && !a.description) a.description = a.reference;
-                });
-                state.expenses.forEach(e => {
-                    e.isEditing = false;
-                });
+                state.advances.forEach(a => { a.isEditing = false; });
+                state.expenses.forEach(e => { e.isEditing = false; });
 
                 document.getElementById('metaName').value = state.name || "";
                 document.getElementById('metaDesignation').value = state.designation || "";
@@ -369,7 +498,6 @@
             calculateLedgerMetrics();
         }
 
-        // --- DYNAMIC SLICING & TEMPORAL FILTER LOGIC ---
         function getFilteredData() {
             const start = document.getElementById('filterStartDate').value;
             const end = document.getElementById('filterEndDate').value;
@@ -395,7 +523,6 @@
             render();
         }
 
-        // --- DATA INPUT TRANSACTIONS ---
         function addAdvanceRecord(e) {
             e.preventDefault();
             const date = document.getElementById('advDate').value;
@@ -422,7 +549,6 @@
             render();
         }
 
-        // --- INLINE EDITING MANAGEMENT: ADVANCES ---
         function toggleEditAdvance(id) {
             state.advances = state.advances.map(a => {
                 if (a.id === id) {
@@ -431,7 +557,6 @@
                         const date = row.querySelector('.edit-adv-date').value;
                         const description = row.querySelector('.edit-adv-desc').value.trim();
                         const amount = parseFloat(row.querySelector('.edit-adv-amount').value);
-
                         if (date && description && !isNaN(amount)) {
                             return { ...a, date, description, amount, isEditing: false };
                         }
@@ -455,7 +580,6 @@
             render();
         }
 
-        // --- INLINE EDITING MANAGEMENT: EXPENSES ---
         function toggleEditExpense(id) {
             state.expenses = state.expenses.map(e => {
                 if (e.id === id) {
@@ -464,7 +588,6 @@
                         const date = row.querySelector('.edit-exp-date').value;
                         const description = row.querySelector('.edit-exp-desc').value.trim();
                         const amount = parseFloat(row.querySelector('.edit-exp-amount').value);
-
                         if (date && description && !isNaN(amount)) {
                             return { ...e, date, description, amount, isEditing: false };
                         }
@@ -488,10 +611,8 @@
             render();
         }
 
-        // --- METRIC CALCULATORS ---
         function calculateLedgerMetrics() {
             const { filteredAdvances, filteredExpenses } = getFilteredData();
-
             const totalAdvances = filteredAdvances.reduce((acc, curr) => acc + curr.amount, 0);
             const totalExpenses = filteredExpenses.reduce((acc, curr) => acc + curr.amount, 0);
             const unspentBalance = totalAdvances - totalExpenses;
@@ -501,27 +622,16 @@
             document.getElementById('displayUnspentBalance').innerText = "₹" + unspentBalance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             const balanceCard = document.getElementById('balanceCardContainer');
-            if (unspentBalance < 0) {
-                balanceCard.style.borderTopColor = "#ef4444"; 
-            } else {
-                balanceCard.style.borderTopColor = "#E5C158"; 
-            }
+            balanceCard.style.borderTopColor = unspentBalance < 0 ? "#ef4444" : "#4A6B5D";
         }
 
-        // --- RENDERING CORE ENGINE ---
         function render() {
             const { filteredAdvances, filteredExpenses, start, end } = getFilteredData();
             calculateLedgerMetrics();
 
-            // Handle Print Header Context Reflection
             const printPeriodEl = document.getElementById('printReportPeriod');
-            if (start || end) {
-                printPeriodEl.innerText = `Report Period Scope: ${start || 'Inception'} to ${end || 'Present'}`;
-            } else {
-                printPeriodEl.innerText = "Report Period: All Ledger Records";
-            }
+            printPeriodEl.innerText = (start || end) ? `Report Period Scope: ${start || 'Inception'} to ${end || 'Present'}` : "Report Period: All Ledger Records";
 
-            // Render Table: Advances
             const advBody = document.getElementById('advanceTableBody');
             document.getElementById('advanceCount').innerText = filteredAdvances.length + " Records";
             if(filteredAdvances.length === 0) {
@@ -532,25 +642,25 @@
                 advBody.innerHTML = filteredAdvances.map(a => {
                     if (a.isEditing) {
                         return `
-                            <tr id="${a.id}" class="bg-[#141418]">
-                                <td class="px-6 py-2"><input type="date" class="edit-adv-date w-full p-2 text-xs rounded outline-none" value="${a.date}"></td>
-                                <td class="px-6 py-2"><input type="text" class="edit-adv-desc w-full p-2 text-xs rounded outline-none" value="${a.description}"></td>
-                                <td class="px-6 py-2"><input type="number" step="0.01" class="edit-adv-amount w-full p-2 text-xs text-right font-medium rounded outline-none" value="${a.amount}"></td>
-                                <td class="px-6 py-2 text-center whitespace-nowrap no-print space-x-4">
-                                    <button onclick="toggleEditAdvance('${a.id}')" class="text-green-500 hover:text-green-400 cursor-pointer" title="Save"><i class="fa-solid fa-check"></i></button>
-                                    <button onclick="cancelEditAdvance('${a.id}')" class="text-red-500 hover:text-red-400 cursor-pointer" title="Cancel"><i class="fa-solid fa-xmark"></i></button>
+                            <tr id="${a.id}" class="bg-gray-50">
+                                <td class="px-6 py-2"><input type="date" class="edit-adv-date w-full p-1.5 text-sm rounded" value="${a.date}"></td>
+                                <td class="px-6 py-2"><input type="text" class="edit-adv-desc w-full p-1.5 text-sm rounded" value="${a.description}"></td>
+                                <td class="px-6 py-2"><input type="number" step="0.01" class="edit-adv-amount w-full p-1.5 text-sm text-right font-semibold rounded" value="${a.amount}"></td>
+                                <td class="px-6 py-2 text-center whitespace-nowrap no-print space-x-3">
+                                    <button onclick="toggleEditAdvance('${a.id}')" class="text-green-600 hover:text-green-500 cursor-pointer"><i class="fa-solid fa-check"></i></button>
+                                    <button onclick="cancelEditAdvance('${a.id}')" class="text-red-500 hover:text-red-400 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                                 </td>
                             </tr>
                         `;
                     } else {
                         return `
                             <tr class="transition-colors">
-                                <td class="px-6 py-4 text-[#A1A1AA] whitespace-nowrap">${formatDate(a.date)}</td>
-                                <td class="px-6 py-4 text-[#F4F4F6]">${a.description}</td>
-                                <td class="px-6 py-4 text-right text-premium-gold-light font-semibold">₹${a.amount.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
-                                <td class="px-6 py-4 text-center whitespace-nowrap no-print space-x-5">
-                                    <button onclick="toggleEditAdvance('${a.id}')" class="text-[#71717A] hover:text-premium-gold transition-colors cursor-pointer" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="removeAdvance('${a.id}')" class="text-[#71717A] hover:text-red-500 transition-colors cursor-pointer" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+                                <td class="px-6 py-4 text-gray-500 whitespace-nowrap">${a.date}</td>
+                                <td class="px-6 py-4 text-gray-900 font-medium">${a.description}</td>
+                                <td class="px-6 py-4 text-right text-gray-900 font-bold">₹${a.amount.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
+                                <td class="px-6 py-4 text-center whitespace-nowrap no-print space-x-4">
+                                    <button onclick="toggleEditAdvance('${a.id}')" class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="removeAdvance('${a.id}')" class="text-gray-400 hover:text-red-600 transition-colors cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
                         `;
@@ -558,7 +668,6 @@
                 }).join('');
             }
 
-            // Render Table: Expenses
             const expBody = document.getElementById('expenseTableBody');
             document.getElementById('expenseCount').innerText = filteredExpenses.length + " Records";
             if(filteredExpenses.length === 0) {
@@ -569,25 +678,25 @@
                 expBody.innerHTML = filteredExpenses.map(e => {
                     if (e.isEditing) {
                         return `
-                            <tr id="${e.id}" class="bg-[#141418]">
-                                <td class="px-6 py-2"><input type="date" class="edit-exp-date w-full p-2 text-xs rounded outline-none" value="${e.date}"></td>
-                                <td class="px-6 py-2"><input type="text" class="edit-exp-desc w-full p-2 text-xs rounded outline-none" value="${e.description}"></td>
-                                <td class="px-6 py-2"><input type="number" step="0.01" class="edit-exp-amount w-full p-2 text-xs text-right font-medium rounded outline-none" value="${e.amount}"></td>
-                                <td class="px-6 py-2 text-center whitespace-nowrap no-print space-x-4">
-                                    <button onclick="toggleEditExpense('${e.id}')" class="text-green-500 hover:text-green-400 cursor-pointer" title="Save"><i class="fa-solid fa-check"></i></button>
-                                    <button onclick="cancelEditExpense('${e.id}')" class="text-red-500 hover:text-red-400 cursor-pointer" title="Cancel"><i class="fa-solid fa-xmark"></i></button>
+                            <tr id="${e.id}" class="bg-gray-50">
+                                <td class="px-6 py-2"><input type="date" class="edit-exp-date w-full p-1.5 text-sm rounded" value="${e.date}"></td>
+                                <td class="px-6 py-2"><input type="text" class="edit-exp-desc w-full p-1.5 text-sm rounded" value="${e.description}"></td>
+                                <td class="px-6 py-2"><input type="number" step="0.01" class="edit-exp-amount w-full p-1.5 text-sm text-right font-semibold rounded" value="${e.amount}"></td>
+                                <td class="px-6 py-2 text-center whitespace-nowrap no-print space-x-3">
+                                    <button onclick="toggleEditExpense('${e.id}')" class="text-green-600 hover:text-green-500 cursor-pointer"><i class="fa-solid fa-check"></i></button>
+                                    <button onclick="cancelEditExpense('${e.id}')" class="text-red-500 hover:text-red-400 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                                 </td>
                             </tr>
                         `;
                     } else {
                         return `
                             <tr class="transition-colors">
-                                <td class="px-6 py-4 text-[#A1A1AA] whitespace-nowrap">${formatDate(e.date)}</td>
-                                <td class="px-6 py-4 text-[#E4E4E7] break-words max-w-xl">${e.description}</td>
-                                <td class="px-6 py-4 text-right text-premium-gold-light font-semibold">₹${e.amount.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
-                                <td class="px-6 py-4 text-center whitespace-nowrap no-print space-x-5">
-                                    <button onclick="toggleEditExpense('${e.id}')" class="text-[#71717A] hover:text-premium-gold transition-colors cursor-pointer" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button onclick="removeExpense('${e.id}')" class="text-[#71717A] hover:text-red-500 transition-colors cursor-pointer" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+                                <td class="px-6 py-4 text-gray-500 whitespace-nowrap">${e.date}</td>
+                                <td class="px-6 py-4 text-gray-900 font-medium break-words max-w-xl">${e.description}</td>
+                                <td class="px-6 py-4 text-right text-gray-900 font-bold">₹${e.amount.toLocaleString('en-IN', {minimumFractionDigits:2})}</td>
+                                <td class="px-6 py-4 text-center whitespace-nowrap no-print space-x-4">
+                                    <button onclick="toggleEditExpense('${e.id}')" class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button onclick="removeExpense('${e.id}')" class="text-gray-400 hover:text-red-600 transition-colors cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
                         `;
@@ -596,24 +705,15 @@
             }
         }
 
-        function formatDate(dStr) {
-            if(!dStr) return "";
-            const parts = dStr.split('-');
-            if(parts.length !== 3) return dStr;
-            return `${parts[0]}-${parts[1]}-${parts[2]}`;
-        }
-
-        // --- DATA EXPORT CONTROLS ---
         function exportToExcel() {
             const { filteredAdvances, filteredExpenses, start, end } = getFilteredData();
-            
             if (filteredAdvances.length === 0 && filteredExpenses.length === 0) {
-                alert("The current date window selection contains no ledger records.");
+                alert("The selected filtered timeline range contains no ledger statements.");
                 return;
             }
 
             let csv = "data:text/csv;charset=utf-8,\uFEFF";
-            csv += "PEBX STEEL BUILDING SYSTEMS - RECONCILIATION EXPORT\n";
+            csv += "PEBX STEEL BUILDING SYSTEMS - DISBURSEMENT STATEMENT\n";
             csv += `Claimant Name,${state.name}\n`;
             csv += `Designation,${state.designation}\n`;
             csv += `Compilation Date,${state.compilationDate}\n`;
@@ -622,15 +722,11 @@
 
             csv += "1. CORPORATE CASH ADVANCES RECEIVED\n";
             csv += "Transaction Date,Advance Description,Amount Received\n";
-            filteredAdvances.forEach(a => {
-                csv += `${a.date},"${a.description.replace(/"/g, '""')}",${a.amount}\n`;
-            });
+            filteredAdvances.forEach(a => { csv += `${a.date},"${a.description.replace(/"/g, '""')}",${a.amount}\n`; });
 
             csv += "\n2. ITEMIZED BUSINESS EXPENSE LEDGER\n";
             csv += "Date,Expense Description,Amount\n";
-            filteredExpenses.forEach(e => {
-                csv += `${e.date},"${e.description.replace(/"/g, '""')}",${e.amount}\n`;
-            });
+            filteredExpenses.forEach(e => { csv += `${e.date},"${e.description.replace(/"/g, '""')}",${e.amount}\n`; });
 
             const encodedUri = encodeURI(csv);
             const link = document.createElement("a");
