@@ -137,6 +137,7 @@
                 <div>
                     <div class="text-[10px] uppercase tracking-[0.25em] text-[#A1A1AA] font-semibold mb-2">Corporate Statement</div>
                     <h1 class="text-2xl sm:text-3xl font-light text-white tracking-wide luxury-heading uppercase">Expense Claim & Reconciliation</h1>
+                    <div id="printReportPeriod" class="text-xs font-bold uppercase tracking-wider text-black hidden print:block mt-3">Report Period: All Ledger Records</div>
                 </div>
                 <div class="flex flex-col items-start md:items-end gap-1 hidden print:flex">
                     <div class="text-2xl font-bold tracking-widest text-black luxury-heading">PEBX</div>
@@ -171,6 +172,31 @@
                 </div>
             </div>
         </header>
+
+        <div class="bg-premium-panel rounded-xl p-5 mb-8 no-print flex flex-col sm:flex-row items-center justify-between gap-4 border-l-4 border-[#E5C158]">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-[#141418] border border-[#2A251E] flex items-center justify-center text-premium-gold">
+                    <i class="fa-solid fa-calendar-circle-lines text-xs"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs font-semibold uppercase tracking-wider text-white">Generate Filtered Scope</h4>
+                    <p class="text-[10px] text-[#A1A1AA]">Metrics summaries and exports will compute strictly between these dates.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto justify-end">
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">From:</span>
+                    <input type="date" id="filterStartDate" onchange="render()" class="rounded-lg px-3 py-1.5 text-xs focus:outline-none">
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-[#A1A1AA]">To:</span>
+                    <input type="date" id="filterEndDate" onchange="render()" class="rounded-lg px-3 py-1.5 text-xs focus:outline-none">
+                </div>
+                <button onclick="clearDateFilter()" class="btn-outline-white px-3 py-1.5 rounded text-[10px] font-medium uppercase tracking-wider transition-all">
+                    Reset Filter
+                </button>
+            </div>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-premium-panel rounded-xl border-t-2 border-[#E5C158] p-6 print-card">
@@ -262,7 +288,7 @@
                 </table>
             </div>
             <div id="advanceEmptyState" class="p-8 text-center text-[#71717A] text-xs italic border-t border-[#1A1A1E]">
-                No advance deposits registered.
+                No advance deposits registered within this date window.
             </div>
         </div>
 
@@ -288,7 +314,7 @@
                 </table>
             </div>
             <div id="expenseEmptyState" class="p-8 text-center text-[#71717A] text-xs italic border-t border-[#1A1A1E]">
-                No operational disbursement records compiled.
+                No operational disbursement records compiled within this date window.
             </div>
         </div>
 
@@ -315,7 +341,6 @@
             if (cache) {
                 state = JSON.parse(cache);
                 
-                // Backwards compatibility mapper for old structural fields
                 state.advances.forEach(a => {
                     a.isEditing = false;
                     if (a.reference && !a.description) a.description = a.reference;
@@ -342,6 +367,32 @@
             state.status = document.getElementById('metaStatus').value;
             localStorage.setItem("pebx_premium_ledger", JSON.stringify(state));
             calculateLedgerMetrics();
+        }
+
+        // --- DYNAMIC SLICING & TEMPORAL FILTER LOGIC ---
+        function getFilteredData() {
+            const start = document.getElementById('filterStartDate').value;
+            const end = document.getElementById('filterEndDate').value;
+            
+            let filteredAdvances = [...state.advances];
+            let filteredExpenses = [...state.expenses];
+
+            if (start) {
+                filteredAdvances = filteredAdvances.filter(a => a.date >= start);
+                filteredExpenses = filteredExpenses.filter(e => e.date >= start);
+            }
+            if (end) {
+                filteredAdvances = filteredAdvances.filter(a => a.date <= end);
+                filteredExpenses = filteredExpenses.filter(e => e.date <= end);
+            }
+
+            return { filteredAdvances, filteredExpenses, start, end };
+        }
+
+        function clearDateFilter() {
+            document.getElementById('filterStartDate').value = "";
+            document.getElementById('filterEndDate').value = "";
+            render();
         }
 
         // --- DATA INPUT TRANSACTIONS ---
@@ -439,8 +490,10 @@
 
         // --- METRIC CALCULATORS ---
         function calculateLedgerMetrics() {
-            const totalAdvances = state.advances.reduce((acc, curr) => acc + curr.amount, 0);
-            const totalExpenses = state.expenses.reduce((acc, curr) => acc + curr.amount, 0);
+            const { filteredAdvances, filteredExpenses } = getFilteredData();
+
+            const totalAdvances = filteredAdvances.reduce((acc, curr) => acc + curr.amount, 0);
+            const totalExpenses = filteredExpenses.reduce((acc, curr) => acc + curr.amount, 0);
             const unspentBalance = totalAdvances - totalExpenses;
 
             document.getElementById('displayTotalAdvances').innerText = "₹" + totalAdvances.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -457,17 +510,26 @@
 
         // --- RENDERING CORE ENGINE ---
         function render() {
+            const { filteredAdvances, filteredExpenses, start, end } = getFilteredData();
             calculateLedgerMetrics();
+
+            // Handle Print Header Context Reflection
+            const printPeriodEl = document.getElementById('printReportPeriod');
+            if (start || end) {
+                printPeriodEl.innerText = `Report Period Scope: ${start || 'Inception'} to ${end || 'Present'}`;
+            } else {
+                printPeriodEl.innerText = "Report Period: All Ledger Records";
+            }
 
             // Render Table: Advances
             const advBody = document.getElementById('advanceTableBody');
-            document.getElementById('advanceCount').innerText = state.advances.length + " Records";
-            if(state.advances.length === 0) {
+            document.getElementById('advanceCount').innerText = filteredAdvances.length + " Records";
+            if(filteredAdvances.length === 0) {
                 advBody.innerHTML = "";
                 document.getElementById('advanceEmptyState').style.display = "block";
             } else {
                 document.getElementById('advanceEmptyState').style.display = "none";
-                advBody.innerHTML = state.advances.map(a => {
+                advBody.innerHTML = filteredAdvances.map(a => {
                     if (a.isEditing) {
                         return `
                             <tr id="${a.id}" class="bg-[#141418]">
@@ -498,13 +560,13 @@
 
             // Render Table: Expenses
             const expBody = document.getElementById('expenseTableBody');
-            document.getElementById('expenseCount').innerText = state.expenses.length + " Records";
-            if(state.expenses.length === 0) {
+            document.getElementById('expenseCount').innerText = filteredExpenses.length + " Records";
+            if(filteredExpenses.length === 0) {
                 expBody.innerHTML = "";
                 document.getElementById('expenseEmptyState').style.display = "block";
             } else {
                 document.getElementById('expenseEmptyState').style.display = "none";
-                expBody.innerHTML = state.expenses.map(e => {
+                expBody.innerHTML = filteredExpenses.map(e => {
                     if (e.isEditing) {
                         return `
                             <tr id="${e.id}" class="bg-[#141418]">
@@ -543,8 +605,10 @@
 
         // --- DATA EXPORT CONTROLS ---
         function exportToExcel() {
-            if (state.advances.length === 0 && state.expenses.length === 0) {
-                alert("Data ledger is completely unpopulated.");
+            const { filteredAdvances, filteredExpenses, start, end } = getFilteredData();
+            
+            if (filteredAdvances.length === 0 && filteredExpenses.length === 0) {
+                alert("The current date window selection contains no ledger records.");
                 return;
             }
 
@@ -553,24 +617,25 @@
             csv += `Claimant Name,${state.name}\n`;
             csv += `Designation,${state.designation}\n`;
             csv += `Compilation Date,${state.compilationDate}\n`;
-            csv += `Audit Status,${state.status}\n\n`;
+            csv += `Audit Status,${state.status}\n`;
+            csv += `Scoped View Window,${start || 'Inception'} to ${end || 'Present'}\n\n`;
 
             csv += "1. CORPORATE CASH ADVANCES RECEIVED\n";
             csv += "Transaction Date,Advance Description,Amount Received\n";
-            state.advances.forEach(a => {
+            filteredAdvances.forEach(a => {
                 csv += `${a.date},"${a.description.replace(/"/g, '""')}",${a.amount}\n`;
             });
 
             csv += "\n2. ITEMIZED BUSINESS EXPENSE LEDGER\n";
             csv += "Date,Expense Description,Amount\n";
-            state.expenses.forEach(e => {
+            filteredExpenses.forEach(e => {
                 csv += `${e.date},"${e.description.replace(/"/g, '""')}",${e.amount}\n`;
             });
 
             const encodedUri = encodeURI(csv);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `PEBX_Financial_Statement_${state.compilationDate || 'Export'}.csv`);
+            link.setAttribute("download", `PEBX_Statement_Scope_${start || 'Start'}_to_${end || 'End'}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
